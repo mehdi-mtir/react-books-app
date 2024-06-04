@@ -17,12 +17,18 @@ function App() {
     setAction("add");
   }
 
+  const addBook = (book)=>{
+    book.id = books[books.length - 1].id + 1;
+    setBooks([...books, book]);
+    setAction("");
+  }
+
   return (
     <div className='container'>
       <h1>Application de gestion de livres :</h1>
       <button className='btn btn-success' onClick={showAddForm}>Ajouter un livre</button>
       <BooksList books={books} />
-      {action === "add" && <BooksAdd />}
+      {action === "add" && <BooksAdd addBookHandler={addBook} />}
     </div>
   );
 }

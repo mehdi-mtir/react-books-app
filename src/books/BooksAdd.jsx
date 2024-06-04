@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-function BooksAdd(){
+function BooksAdd(props){
     const [book, setBook] = useState({title : "", author : ""});
 
     /*const titleChangeHandler = (event)=>{
@@ -15,27 +15,28 @@ function BooksAdd(){
         setBook({...book, [target.name] : target.value })
     }
 
-    const addNewBook = (event)=>{
-        event.preventDefault();
-        console.log("Ajout du livre");
-    }
+    /*const addNewBook = ()=>{
+        //event.preventDefault();
+        //console.log("Ajout du livre");
+        
+    }*/
 
 
     return <>
     <h2>Ajouter un livre</h2>
-    <form onSubmit={addNewBook}>
+    <form >
 
     <div className="mb-3">
       <label htmlFor="title" className="form-label">Titre</label>
       <input type="text" className="form-control" id="title" name="title" value={book.title} onChange={inputChangeHandler} />
     </div>
-    
+
     <div className="mb-3">
       <label htmlFor="author" className="form-label">Auteur</label>
       <input type="text" className="form-control" id="author" name="author" value={book.author} onChange={inputChangeHandler} />
     </div>
     
-    <button type="submit" className="btn btn-primary">Valider</button>
+    <button type="button" className="btn btn-primary" onClick={()=>{props.addBookHandler(book);}}>Valider</button>
   </form>
   </>
 }
