@@ -13,7 +13,7 @@ function BooksList(props){
     <tbody>
         {
             props.books.map(
-                book=> <tr>
+                book=> <tr key={book.id}>
                 <th scope="row">{book.id}</th>
                 <td>{book.title}</td>
                 <td>{book.author}</td>

@@ -4,7 +4,7 @@ import BooksList from './books/BooksList';
 import BooksAdd from './books/BooksAdd';
 
 function App() {
-  
+  const [action, setAction] = useState("");
   const [books, setBooks] = useState(
     [
       {id : 1, title : "Slight Edge", author : "Jeff Olsen"},
@@ -13,12 +13,16 @@ function App() {
     ]
   );
 
+  const showAddForm = ()=>{
+    setAction("add");
+  }
+
   return (
     <div className='container'>
       <h1>Application de gestion de livres :</h1>
-      <button className='btn btn-success'>Ajouter un livre</button>
+      <button className='btn btn-success' onClick={showAddForm}>Ajouter un livre</button>
       <BooksList books={books} />
-      <BooksAdd />
+      {action === "add" && <BooksAdd />}
     </div>
   );
 }
