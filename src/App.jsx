@@ -1,6 +1,7 @@
 import './App.css';
 import { useState } from 'react';
 import BooksList from './books/BooksList';
+import BooksAdd from './books/BooksAdd';
 
 function App() {
   
@@ -15,8 +16,9 @@ function App() {
   return (
     <div className='container'>
       <h1>Application de gestion de livres :</h1>
-
+      <button className='btn btn-success'>Ajouter un livre</button>
       <BooksList books={books} />
+      <BooksAdd />
     </div>
   );
 }
