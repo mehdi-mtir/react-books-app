@@ -1,13 +1,15 @@
 import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 
 function BooksEdit(props){
-    const [book, setBook] = useState(props.book);
-    useEffect(
+    const {id} = useParams();
+    const [book, setBook] = useState(props.books.find(book=>book.id === Number(id)));
+    /*useEffect(
         ()=> {
             console.log("Use Effect : " + JSON.stringify(props.book));
             setBook(props.book);
         }
-    , [props]);
+    , [props]);*/
 
 
     const inputChangeHandler = ({target})=>{
