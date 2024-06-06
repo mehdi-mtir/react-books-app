@@ -4,24 +4,33 @@ import BooksList from './books/BooksList';
 import BooksAdd from './books/BooksAdd';
 import BooksEdit from './books/BooksEdit';
 import { Routes, Route, Navigate, Link, useNavigate } from 'react-router-dom';
+import BooksDetails from './books/BooksDetails';
 
 function App() {
   //const [action, setAction] = useState("");
   //const [bookToEdit, setBookToEdit] = useState({});
-  const [books, setBooks] = useState(
+  /*const [books, setBooks] = useState(
     [
-      {id : 1, title : "Slight Edge", author : "Jeff Olsen"},
-      {id : 2, title : "Atmic Habits", author : "James Clear"},
-      {id : 3, title : "Power of habits", author : "Charles Duhigg"}
+      {id : 1, title : "Slight Edge", author : "Jeff Olsen", description: "description du livre Slight Edge", price : 20.50},
+      {id : 2, title : "Atomic Habits", author : "James Clear", description: "description du livre Atmic Habits", price : 22.40},
+      {id : 3, title : "Power of habits", author : "Charles Duhigg", description: "description du livre Power of habits", price : 27.20}
     ]
+  );*/
+  const init = [
+    {id : 1, title : "Slight Edge", author : "Jeff Olsen", description: "description du livre Slight Edge", price : 20.50},
+    {id : 2, title : "Atomic Habits", author : "James Clear", description: "description du livre Atmic Habits", price : 22.40},
+    {id : 3, title : "Power of habits", author : "Charles Duhigg", description: "description du livre Power of habits", price : 27.20}
+  ];
+
+  const [books, setBooks] = useState(
+    window.localStorage.getItem("books")?JSON.parse(window.localStorage.getItem("books")):init
   );
 
-  /*useEffect(
+  useEffect(
     ()=>{
-      console.log("BookToEdit : " + JSON.stringify(bookToEdit))
-      
+      window.localStorage.setItem("books", JSON.stringify(books))
     }
-  )*/
+  , [books]);
 
   const navigate = useNavigate();
 
@@ -66,6 +75,7 @@ function App() {
         <Route path='/books' exact element={<BooksList books={books} deleteBookHandler={deleteBook} />} />
         <Route path='/books/add' exact element={<BooksAdd addBookHandler={addBook} />} />
         <Route path='/books/edit/:id' exact element={<BooksEdit editBookHandler={editBook} books={books} />} />
+        <Route path='/books/:id' exact element={<BooksDetails books={books} /> } />
       </Routes>
 
       {/*
