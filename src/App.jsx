@@ -15,7 +15,7 @@ function App() {
       {id : 2, title : "Atomic Habits", author : "James Clear", description: "description du livre Atmic Habits", price : 22.40},
       {id : 3, title : "Power of habits", author : "Charles Duhigg", description: "description du livre Power of habits", price : 27.20}
     ]
-  );*/
+  );
   const init = [
     {id : 1, title : "Slight Edge", author : "Jeff Olsen", description: "description du livre Slight Edge", price : 20.50},
     {id : 2, title : "Atomic Habits", author : "James Clear", description: "description du livre Atmic Habits", price : 22.40},
@@ -45,7 +45,7 @@ function App() {
 
   const getBookToEdit = (id)=>{
     setBookToEdit(books.find(book=>book.id === id));
-  }*/
+  }
 
 
   const addBook = (book)=>{
@@ -65,17 +65,17 @@ function App() {
     if(window.confirm("Êtes-vous sûre de vouloir supprimer le livre?"))
       setBooks(books.filter(b=>b.id !== id));
   }
-
+*/
   return (
     <div className='container'>
       <h1>Application de gestion de livres :</h1>
       
       <Routes>
         <Route path='/' element={<Navigate to='/books' replace=''/> } />
-        <Route path='/books' exact element={<BooksList books={books} deleteBookHandler={deleteBook} />} />
-        <Route path='/books/add' exact element={<BooksAdd addBookHandler={addBook} />} />
-        <Route path='/books/edit/:id' exact element={<BooksEdit editBookHandler={editBook} books={books} />} />
-        <Route path='/books/:id' exact element={<BooksDetails books={books} /> } />
+        <Route path='/books' exact element={<BooksList />} />
+        <Route path='/books/add' exact element={<BooksAdd />} />
+        <Route path='/books/edit/:id' exact element={<BooksEdit />} />
+        <Route path='/books/:id' exact element={<BooksDetails /> } />
       </Routes>
 
       {/*
