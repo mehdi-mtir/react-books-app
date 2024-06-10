@@ -31,6 +31,7 @@ function BooksList(props){
         <th scope="col">#</th>
         <th scope="col">Titre</th>
         <th scope="col">Auteur</th>
+        <th scope="col">Détails</th>
         <th scope="col">Editer</th>
         <th scope="col">Supprimer</th>
       </tr>
