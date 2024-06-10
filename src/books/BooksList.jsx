@@ -16,8 +16,22 @@ function BooksList(props){
         }
     , [])
 
-    const deleteBook = (id)=>{
-        //if(window.confirm("Êtes-vous sûre de vouloir supprimer le livre?"))
+    const deleteBook = async (id)=>{
+        if(window.confirm("Êtes-vous sûre de vouloir supprimer le livre?")){
+            const requestOptions = {
+                method : "DELETE"
+            };
+
+            try{
+                const res = await fetch("http://localhost:3000/books/", requestOptions);
+                const result = await res.json();
+                setBooks(books.filter(b=>b.id !== id))
+            }
+            catch(error){
+                console.log(error)
+            }
+
+        }
             //Supprimer les données sur le serveur
           //setBooks(books.filter(b=>b.id !== id));
     }
