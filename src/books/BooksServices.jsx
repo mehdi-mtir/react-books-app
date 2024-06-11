@@ -39,7 +39,7 @@ export async function getBooksService(){
     let data;
     const init = [];
 
-    if(navigator.online){
+    if(navigator.onLine){
         //synchroniser les modifications réalisées en offline (si elles existent)
         const response = await fetch("http://localhost:3000/books");
         data = await response.json();
