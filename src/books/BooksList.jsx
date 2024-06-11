@@ -2,39 +2,14 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 function BooksList(props){
-    const [books, setBooks] = useState([]);
+    const [books, setBooks] = useState(props.books);
 
-    useEffect(
-        ()=>{
-            const getData = async ()=>{
-                const response = await fetch("http://localhost:3000/books");
-                const data = await response.json();
+    /*useEffect(
+        ()=>setBooks(props.books)
+    , [props])
+    */
 
-                setBooks(data);
-            }
-            getData();
-        }
-    , [])
 
-    const deleteBook = async (id)=>{
-        if(window.confirm("Êtes-vous sûre de vouloir supprimer le livre?")){
-            const requestOptions = {
-                method : "DELETE"
-            };
-
-            try{
-                const res = await fetch("http://localhost:3000/books/", requestOptions);
-                const result = await res.json();
-                setBooks(books.filter(b=>b.id !== id))
-            }
-            catch(error){
-                console.log(error)
-            }
-
-        }
-            //Supprimer les données sur le serveur
-          //setBooks(books.filter(b=>b.id !== id));
-    }
 
     return <>
     <Link className='btn btn-success' to="/books/add">Ajouter un livre</Link>
@@ -52,7 +27,7 @@ function BooksList(props){
     </thead>
     <tbody>
         {
-            books.map(
+            props.books.map(
                 book=> <tr key={book.id}>
                 <th scope="row">{book.id}</th>
                 <td>{book.title}</td>
@@ -60,7 +35,7 @@ function BooksList(props){
                 {/*<td><Link className="btn btn-info" to={"/books/" + book.id} /></td>*/}
                 <td><Link className="btn btn-info" to={`/books/${book.id}`}>Voir détails </Link></td>
                 <td><Link className="btn btn-primary" to={"/books/edit/"+book.id}>Editer</Link></td>
-                <td><button className="btn btn-danger" onClick={()=>deleteBook(book.id)}>Supprimer</button></td>
+                <td><button className="btn btn-danger" onClick={()=>props.deleteBookHandler(book.id)}>Supprimer</button></td>
 
               </tr>
             )

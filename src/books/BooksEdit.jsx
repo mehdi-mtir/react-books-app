@@ -1,41 +1,13 @@
 import { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 function BooksEdit(props){
     const {id} = useParams();
-    const [book, setBook] = useState({title : "", author : "", description : "", price : 0});
-
-    const navigate = useNavigate();
-
-    useEffect(
-        ()=>{
-            const getData = async ()=>{
-                const response = await fetch("http://localhost:3000/books/"+id);
-                const data = await response.json();
-
-                setBook(data);
-            }
-            getData();
-        }
-    , []);
+    const [book, setBook] = useState(props.books.find(b=>b.id === id));
 
 
     const inputChangeHandler = ({target})=>{
         setBook({...book, [target.name] : target.value })
-    }
-
-    const editBook = async ()=>{
-        const requestOptions = {
-            method : "PUT",
-            headers : {'content-type' : 'application/json'},
-            body : JSON.stringify(book)
-        };
-
-        const res = await fetch("http://localhost:3000/books/"+id, requestOptions);
-        //fetch("http://localhost:3000/books/"+id, requestOptions)
-        
-        navigate("/books");
-
     }
 
 
@@ -65,7 +37,7 @@ function BooksEdit(props){
 
     
     
-    <button type="button" className="btn btn-primary" onClick={()=>{editBook();}}>Valider</button>
+    <button type="button" className="btn btn-primary" onClick={()=>{props.editBookHandler(book);}}>Valider</button>
   </form>
   </>
 }

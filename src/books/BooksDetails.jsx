@@ -1,21 +1,10 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useParams } from "react-router-dom";
 
 function BooksDetails(props){
     const {id} = useParams();
-    const [book, setBook] = useState({title : "", author : "", description : "", price : 0});
+    const [book] = useState(props.books.find(b=>b.id === id));
 
-    useEffect(
-        ()=>{
-            const getData = async ()=>{
-                const response = await fetch("http://localhost:3000/books/"+id);
-                const data = await response.json();
-
-                setBook(data);
-            }
-            getData();
-        }
-    , []);
 
     return <div>
         <h2>Détails du livre {book.title}</h2>

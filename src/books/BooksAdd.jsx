@@ -1,10 +1,10 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+//import { useNavigate } from "react-router-dom";
 
 function BooksAdd(props){
     const [book, setBook] = useState({title : "", author : "", description : "", price : 0});
 
-    const navigate = useNavigate();
+    //const navigate = useNavigate();
 
     /*const titleChangeHandler = (event)=>{
         setBook({...book, title : event.target.value});
@@ -23,19 +23,6 @@ function BooksAdd(props){
         //console.log("Ajout du livre");
         
     }*/
-
-    const addBook = async ()=>{
-        const requestOptions = {
-            method : "POST",
-            headers : {'content-type' : 'application/json'},
-            body : JSON.stringify(book)
-        };
-
-        const res = await fetch("http://localhost:3000/books/", requestOptions);
-
-        navigate("/books");
-
-    }
 
 
     return <>
@@ -62,7 +49,7 @@ function BooksAdd(props){
       <textarea className="form-control" id="description" name="description" value={book.description} onChange={inputChangeHandler} ></textarea>
     </div>
     
-    <button type="button" className="btn btn-primary" onClick={()=>{addBook();}}>Valider</button>
+    <button type="button" className="btn btn-primary" onClick={()=>{props.addBookHandler(book);}}>Valider</button>
   </form>
   </>
 }
